@@ -1,12 +1,9 @@
-const correctPassword = "123";
-
 // Convert Dropbox links to direct links
 function convertDropboxLink(url) {
     if (url.includes("dropbox.com")) {
-        // Change to direct download link
         return url
             .replace("www.dropbox.com", "dl.dropboxusercontent.com")
-            .replace("dropbox.com", "dl.dropboxusercontent.com") // fallback
+            .replace("dropbox.com", "dl.dropboxusercontent.com")
             .replace("?dl=0", "")
             .replace("&dl=0", "")
             .replace("&dl=1", "")
@@ -15,10 +12,18 @@ function convertDropboxLink(url) {
     return url;
 }
 
-// Handle password check
-document.getElementById('submitPassword').addEventListener('click', () => {
+// Handle password screen UI (client-side only)
+document.getElementById('submitPassword').addEventListener('click', async () => {
     const password = document.getElementById('adminPassword').value;
-    if (password === correctPassword) {
+
+    const response = await fetch('/verify-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+    });
+
+    const result = await response.json();
+    if (result.success) {
         const screen = document.getElementById('passwordScreen');
         screen.style.opacity = '0';
         setTimeout(() => {
@@ -37,10 +42,12 @@ document.getElementById('submitForm').addEventListener('click', async () => {
     const name = document.getElementById('nameInput').value;
     const audio = convertDropboxLink(document.getElementById('audioInput').value.trim());
     const imageInputRaw = document.getElementById('imageInput').value.trim();
+    const password = document.getElementById('adminPassword').value;
 
     const image = imageInputRaw
         ? convertDropboxLink(imageInputRaw)
         : convertDropboxLink('https://www.dropbox.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o&dl=0');
+
     try {
         const response = await fetch('http://localhost:3000/update-json', {
             method: 'POST',
@@ -50,7 +57,7 @@ document.getElementById('submitForm').addEventListener('click', async () => {
                 name,
                 audio,
                 image,
-                password: correctPassword
+                password // this is validated in the backend now
             })
         });
 
@@ -68,7 +75,7 @@ document.getElementById('submitForm').addEventListener('click', async () => {
             document.getElementById('audioInput').value = '';
             document.getElementById('imageInput').value = '';
         } else {
-            alert('Failed to add content. Please try again.');
+            alert('Failed to add content. ' + (result.message || 'Please try again.'));
         }
 
     } catch (error) {
