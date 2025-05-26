@@ -1,85 +1,86 @@
-// Convert Dropbox links to direct links
+<script>
+// === Convert Dropbox links to direct download links ===
 function convertDropboxLink(url) {
-    if (url.includes("dropbox.com")) {
-        return url
-            .replace("www.dropbox.com", "dl.dropboxusercontent.com")
-            .replace("dropbox.com", "dl.dropboxusercontent.com")
-            .replace("?dl=0", "")
-            .replace("&dl=0", "")
-            .replace("&dl=1", "")
-            .replace("?dl=1", "");
-    }
-    return url;
+  if (url.includes("dropbox.com")) {
+    return url
+      .replace("www.dropbox.com", "dl.dropboxusercontent.com")
+      .replace("dropbox.com", "dl.dropboxusercontent.com")
+      .replace(/\?dl=\d/, "")
+      .replace(/&dl=\d/, "");
+  }
+  return url;
 }
 
-// Handle password screen UI (client-side only)
+// === Password Verification ===
 document.getElementById('submitPassword').addEventListener('click', async () => {
-    const password = document.getElementById('adminPassword').value;
+  const password = document.getElementById('adminPassword').value;
 
+  try {
     const response = await fetch('/verify-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
     });
 
     const result = await response.json();
+
     if (result.success) {
-        const screen = document.getElementById('passwordScreen');
-        screen.style.opacity = '0';
-        setTimeout(() => {
-            screen.style.display = 'none';
-        }, 500);
-        document.getElementById('adminForm').classList.add('active');
-        document.body.classList.remove('no-scroll');
+      document.getElementById('passwordScreen').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('passwordScreen').style.display = 'none';
+      }, 500);
+
+      document.getElementById('adminForm').classList.add('active');
+      document.body.classList.remove('no-scroll');
     } else {
-        alert('Incorrect password, please try again.');
+      alert('Incorrect password. Try again.');
     }
+  } catch (error) {
+    alert('Server error. Please try later.');
+  }
 });
 
-// Handle form submission
+// === Form Submission Handler ===
 document.getElementById('submitForm').addEventListener('click', async () => {
-    const type = document.getElementById('contentType').value;
-    const name = document.getElementById('nameInput').value;
-    const audio = convertDropboxLink(document.getElementById('audioInput').value.trim());
-    const imageInputRaw = document.getElementById('imageInput').value.trim();
-    const password = document.getElementById('adminPassword').value;
+  const type = document.getElementById('contentType').value.trim();
+  const name = document.getElementById('nameInput').value.trim();
+  const audio = convertDropboxLink(document.getElementById('audioInput').value.trim());
+  const imageInput = document.getElementById('imageInput').value.trim();
+  const password = document.getElementById('adminPassword').value.trim();
 
-    const image = imageInputRaw
-        ? convertDropboxLink(imageInputRaw)
-        : convertDropboxLink('https://www.dropbox.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o&dl=0');
+  const image = imageInput || convertDropboxLink('https://www.dropbox.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o&dl=0');
 
-    try {
-        const response = await fetch('https://markazalhidayah.com/update-json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                type,
-                name,
-                audio,
-                image,
-                password // this is validated in the backend now
-            })
-        });
+  if (!type || !name || !audio) {
+    alert('Please fill in all required fields.');
+    return;
+  }
 
-        const result = await response.json();
-        if (result.success) {
-            alert('Added successfully!');
+  try {
+    const response = await fetch('/update-json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type, name, audio, image, password })
+    });
 
-            if (type === 'naxwe') {
-                window.location.href = '../../pages/naxwah/naxwah.html';
-            } else if (type === 'tafsir') {
-                window.location.href = '../../pages/tafseer/tafseer.html';
-            }
+    const result = await response.json();
 
-            document.getElementById('nameInput').value = '';
-            document.getElementById('audioInput').value = '';
-            document.getElementById('imageInput').value = '';
-        } else {
-            alert('Failed to add content. ' + (result.message || 'Please try again.'));
-        }
+    if (result.success) {
+      alert('Content added successfully!');
+      if (type === 'naxwe') {
+        window.location.href = '/naxwah';
+      } else if (type === 'tafsir') {
+        window.location.href = '/tafseer';
+      }
 
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Server connection failed');
+      document.getElementById('nameInput').value = '';
+      document.getElementById('audioInput').value = '';
+      document.getElementById('imageInput').value = '';
+    } else {
+      alert('Failed: ' + (result.message || 'Unknown error'));
     }
+  } catch (err) {
+    console.error('Error during fetch:', err);
+    alert('Failed to connect to server.');
+  }
 });
+</script>
