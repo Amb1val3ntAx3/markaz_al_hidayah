@@ -49,7 +49,7 @@ document.getElementById('submitForm').addEventListener('click', async () => {
         : convertDropboxLink('https://www.dropbox.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o&dl=0');
 
     try {
-        const response = await fetch('http://localhost:10000/update-json', {
+        const response = await fetch('https://markazalhidayah.com/update-json', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
