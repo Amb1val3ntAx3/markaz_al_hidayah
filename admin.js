@@ -1,4 +1,4 @@
-<script>
+
 // === Convert Dropbox links to direct download links ===
 function convertDropboxLink(url) {
   if (url.includes("dropbox.com")) {
@@ -83,4 +83,4 @@ document.getElementById('submitForm').addEventListener('click', async () => {
     alert('Failed to connect to server.');
   }
 });
-</script>
+
