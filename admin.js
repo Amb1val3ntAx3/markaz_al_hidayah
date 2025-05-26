@@ -1,85 +1,71 @@
-// Convert Dropbox links to direct links
-function convertDropboxLink(url) {
-    if (url.includes("dropbox.com")) {
-        return url
-            .replace("www.dropbox.com", "dl.dropboxusercontent.com")
-            .replace("dropbox.com", "dl.dropboxusercontent.com")
-            .replace("?dl=0", "")
-            .replace("&dl=0", "")
-            .replace("&dl=1", "")
-            .replace("?dl=1", "");
-    }
-    return url;
-}
+require('dotenv').config();
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const cors = require('cors');
+const app = express();
 
-// Handle password screen UI (client-side only)
-document.getElementById('submitPassword').addEventListener('click', async () => {
-    const password = document.getElementById('adminPassword').value;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-    const response = await fetch('/verify-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password })
-    });
+// Middleware
+app.use(express.json());
 
-    const result = await response.json();
-    if (result.success) {
-        const screen = document.getElementById('passwordScreen');
-        screen.style.opacity = '0';
-        setTimeout(() => {
-            screen.style.display = 'none';
-        }, 500);
-        document.getElementById('adminForm').classList.add('active');
-        document.body.classList.remove('no-scroll');
+// Enable CORS for your frontend domain
+app.use(cors({
+    origin: 'https://markazalhidayah.com', // or use '*' if you want to allow all origins (less secure)
+}));
+
+// Serve static files (if needed)
+app.use(express.static(path.join(__dirname)));
+
+// Routes to serve your pages
+app.get('/index.html', (req, res) => res.redirect('/'));
+app.get('/naxwah', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'naxwah', 'naxwah.html')));
+app.get('/tafseer', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'tafseer', 'tafseer.html')));
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'pages', 'admin', 'admin.html')));
+
+// Verify password endpoint
+app.post('/verify-password', (req, res) => {
+    const { password } = req.body;
+    if (password === ADMIN_PASSWORD) {
+        res.json({ success: true });
     } else {
-        alert('Incorrect password, please try again.');
+        res.json({ success: false });
     }
 });
 
-// Handle form submission
-document.getElementById('submitForm').addEventListener('click', async () => {
-    const type = document.getElementById('contentType').value;
-    const name = document.getElementById('nameInput').value;
-    const audio = convertDropboxLink(document.getElementById('audioInput').value.trim());
-    const imageInputRaw = document.getElementById('imageInput').value.trim();
-    const password = document.getElementById('adminPassword').value;
+// Update JSON endpoint
+app.post('/update-json', (req, res) => {
+    const { password, type, name, audio, image } = req.body;
 
-    const image = imageInputRaw
-        ? convertDropboxLink(imageInputRaw)
-        : convertDropboxLink('https://www.dropbox.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o&dl=0');
+    if (password !== ADMIN_PASSWORD) {
+        return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    if (!['naxwe', 'tafsir'].includes(type)) {
+        return res.status(400).json({ success: false, message: "Invalid content type" });
+    }
+
+    const jsonPath = path.join(__dirname, 'storage', `${type}.json`);
 
     try {
-        const response = await fetch('http://localhost:3000/update-json', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                type,
-                name,
-                audio,
-                image,
-                password // this is validated in the backend now
-            })
-        });
+        const data = fs.existsSync(jsonPath)
+            ? JSON.parse(fs.readFileSync(jsonPath, 'utf-8'))
+            : [];
 
-        const result = await response.json();
-        if (result.success) {
-            alert('Added successfully!');
+        data.push({ name, audio, image });
 
-            if (type === 'naxwe') {
-                window.location.href = '../../pages/naxwah/naxwah.html';
-            } else if (type === 'tafsir') {
-                window.location.href = '../../pages/tafseer/tafseer.html';
-            }
+        fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), 'utf-8');
 
-            document.getElementById('nameInput').value = '';
-            document.getElementById('audioInput').value = '';
-            document.getElementById('imageInput').value = '';
-        } else {
-            alert('Failed to add content. ' + (result.message || 'Please try again.'));
-        }
-
+        res.json({ success: true });
     } catch (error) {
-        console.error('Error:', error);
-        alert('Server connection failed');
+        console.error("JSON update error:", error);
+        res.status(500).json({ success: false, message: "Failed to update" });
     }
+});
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
