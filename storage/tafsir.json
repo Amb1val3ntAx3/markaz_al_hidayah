@@ -804,9 +804,49 @@
     "audio": "https://dl.dropbox.com/scl/fi/2cqtv2iuw6djg35mz5wbd/GMT20250428-173526_Recording.m4a?rlkey=7kd9hbfs3u7tbd5lz8ulxg02t&",
     "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
   },
+    {
+    "name": "Surah Zukhruf 1",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/azgzbotk1iu4thinnuv4p/GMT20250511-174206_Recording.m4a",
+    "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
+  },
   {
-    "name": "Surah Zukhruf 1-1",
-    "audio": "https://dl.dropboxusercontent.com/scl/fi/azgzbotk1iu4thinnuv4p/GMT20250511-174206_Recording.m4a?rlkey=a23u09kzotakmijrsg37s4vb6&st=3dmvhoyu",
+    "name": "Surah Zukhruf 2",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/bqmbe6aqzkizvfc7pthhn/GMT20250517-173411_Recording.m4a",
+    "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
+  },
+  {
+    "name": "Surah Zukhruf 3",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/m9qd7l4b6tdye73sfr50w/GMT20250518-174202_Recording.m4a",
+    "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
+  },
+  {
+    "name": "Surah Zukhruf 4",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/bfzarzt3r5l0xdh582s30/GMT20250524-173858_Recording.m4a",
+    "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
+  },
+  {
+    "name": "Surah Dukhan 1-18",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/wq7fw4q9hdkjmao2404wh/GMT20250525-174123_Recording.m4a",
+    "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
+  },
+  {
+    "name": "Surah Dukhan 18 - 59",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/krnpntmgzk4fh9m156a16/Kkkd2.m4a",
+    "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
+  },
+  {
+    "name": "Surah Jathiya 1-17",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/ug6t1ycmno77juwpym4rx/GMT20250601-174229_Recording.m4a",
+    "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
+  },
+  {
+    "name": "Surah Jathiya 18 - 37",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/mk99fgy0lgvolr73s3k02/GMT20250621-173801_Recording.m4a",
+    "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
+  },
+  {
+    "name": "Surah Ahqaf 1 - 16",
+    "audio": "https://dl.dropboxusercontent.com/scl/fi/yd3ktyzlkszpmd6cls2lg/GMT20250622-173852_Recording.m4a",
     "image": "https://dl.dropboxusercontent.com/scl/fi/7amjc2l4fec5rcouxkif8/default.png?rlkey=23f6snpiy46gg25nhczgwnkvz&st=yw1ynu7o"
   }
 ]
