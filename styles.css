@@ -325,46 +325,28 @@ a.active, a:hover {
 }
 
 .item {
-  width: 220px; /* fix width same as image or a bit bigger */
-  height: 250px; /* set a fixed height to keep them uniform */
-  background: white;
+  margin-top: 36px;
+  background-color: #66B6E1;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  margin: 15px;
-  padding: 10px;
-  box-sizing: border-box;
-  overflow: hidden; /* prevent content spilling */
+  padding: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   position: relative;
-  text-align: center;
+  width: 260px;
+  box-shadow: #66B6E1 0px 0px 5px;
+  gap: 10px;
 }
 
-.card-name {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.card-image {
+  width: 220px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  position: absolute;
+  bottom: 150px;
+  box-shadow: black 0px 10px 10px;
+  transition: all 0.3s ease-out;
 }
-
-.item h1 {
-  white-space: normal; /* allow wrapping */
-  word-wrap: break-word;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-
-#cardFolder {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
-
 
 .card-image:hover {
   bottom: 160px;
@@ -405,15 +387,12 @@ progress::-moz-progress-bar {
 }
 
 .card-name {
-  width: 220px;
-  max-height: 200px; /* limit the height */
-  border-radius: 12px;
-  margin-bottom: 8px;
-  position: absolute;
-  bottom: 150px;
-  box-shadow: black 0px 10px 10px;
+  margin-top: 120px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: snow;
+  padding-bottom: 5px;
   transition: all 0.3s ease-out;
-  object-fit: cover; /* make sure image fills the box nicely */
 }
 
 .card-name:hover {
