@@ -91,7 +91,6 @@ a.active, a:hover {
   color: #BDC3C7;
   font-size: 1rem;
   line-height: 1.6;
-  
 }
 
 .footer-section .contact {
@@ -119,6 +118,7 @@ a.active, a:hover {
 #special {
   text-align: center;
 }
+
 /* WhatsApp and Telegram Specific Styles */
 .footer-section li a.whatsapp {
   background-color: #25D366;
@@ -143,13 +143,13 @@ a.active, a:hover {
 /* For smaller screens (Mobile Responsive) */
 @media (max-width: 768px) {
   .end {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .footer-section {
-      width: 100%;
-      margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 20px;
   }
 }
 
@@ -160,8 +160,7 @@ a.active, a:hover {
   height: 72vh;
   overflow: hidden;
   opacity: 0;
-  animation: fadeIn 1s ease-out forwards; /* Apply the fade-in animation */
-
+  animation: fadeIn 1s ease-out forwards;
 }
 
 @keyframes fadeIn {
@@ -176,7 +175,6 @@ a.active, a:hover {
   object-fit: cover;
   display: block;
 }
-
 
 .roster-text {
   position: absolute;
@@ -194,7 +192,6 @@ a.active, a:hover {
 
 /* Title Styling */
 .title {
-  
   margin-top: 100px;
   text-align: center;
   font-size: 48px;
@@ -237,7 +234,7 @@ a.active, a:hover {
   width: 300px;
   border-radius: 5px;
   outline: 4px solid #66B6E1;
-  box-shadow: black 10px 10px 10px ;
+  box-shadow: black 10px 10px 10px;
 }
 
 .selection {
@@ -260,7 +257,6 @@ a.active, a:hover {
   opacity: 1;
   transform: translateY(0);
 }
-
 
 .selection a {
   position: relative;
@@ -304,7 +300,6 @@ a.active, a:hover {
   transform: scale(0.95);
 }
 
-
 .everything {
   height: 65vh;
   display: flex;
@@ -316,14 +311,14 @@ a.active, a:hover {
 
 .card-folder {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-columns: repeat(3, 1fr);
   gap: 60px 40px;
   padding: 35px 0;
   justify-items: center;
 }
 
 .card-container {
-  max-width: 880px; /* 260px x 3 + gaps approx */
+  max-width: 880px;
   margin: 0 auto;
   padding: 0 20px;
   overflow-x: hidden;
@@ -340,90 +335,51 @@ a.active, a:hover {
   position: relative;
   width: 260px;
   box-shadow: #66B6E1 0px 0px 5px;
-  gap: 10px; /* Space between children */
+  gap: 10px;
 }
 
 .card-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 220px;
-  height: 150px; /* or auto if preferred */
   border-radius: 12px;
-  background-color: white;
-  box-shadow: black 0px 10px 10px;
   margin-bottom: 8px;
   position: absolute;
-  top: -60px;
-  overflow: hidden;
-  text-align: center;
-  padding: 10px;
-}
-.card-image img, .card-image span {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.card-image.arabic-text {
-  width: 220px;
-  height: 150px;
-  background-color: white;
-  color: #131B23;
-  border-radius: 12px;
-  font-size: 24px;
-  font-weight: bold;
-  font-family: 'Amiri', 'Scheherazade', serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  direction: rtl;
-  line-height: 1.6;
-  padding: 10px;
-  box-shadow: black 0px 10px 10px;
-  position: absolute;
   bottom: 150px;
+  box-shadow: black 0px 10px 10px;
+  transition: all 0.3s ease-out;
 }
+
 .card-image:hover {
-
   bottom: 160px;
-
 }
 
-/* Style the progress wrapper if needed */
 .progress-bar {
   width: 80%;
   margin-top: 8px;
   cursor: pointer;
 }
 
-/* Reset native appearance */
 progress {
   width: 100%;
   height: 12px;
   border-radius: 20px;
   appearance: none;
   -webkit-appearance: none;
-  background-color: #d3eaf2; /* fallback */
+  background-color: #d3eaf2;
   overflow: hidden;
   border: none;
 }
 
-/* Chrome & Safari */
 progress::-webkit-progress-bar {
   background-color: #d3eaf2;
   border-radius: 20px;
 }
 
 progress::-webkit-progress-value {
-  background-color: #ffffff; /* or a light shade like #E7DFC6 */
+  background-color: #ffffff;
   border-radius: 20px;
   transition: width 0.3s ease-in-out;
 }
 
-/* Firefox */
 progress::-moz-progress-bar {
   background-color: #ffffff;
   border-radius: 20px;
@@ -437,9 +393,7 @@ progress::-moz-progress-bar {
   color: snow;
   padding-bottom: 5px;
   transition: all 0.3s ease-out;
-  
 }
-
 
 .card-name:hover {
   text-shadow: white 0px 0px 5px;
@@ -451,7 +405,7 @@ progress::-moz-progress-bar {
   width: 44px;
   height: 44px;
   border: none;
-  border-radius: 50%; /* always round */
+  border-radius: 50%;
   background-color: transparent;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -460,22 +414,19 @@ progress::-moz-progress-bar {
   justify-content: center;
   margin-bottom: 5px;
 }
-  
+
 .play-button:hover {
   background-color: rgba(255, 250, 250, 0.441);
-
 }
 
 .audio-controls {
-  display: flex;              /* Use flexbox */
-  flex-direction: row;        /* Arrange items in a row */
-  gap: 12px;                  /* Space between buttons */
-  align-items: center;        /* Vertically center them */
-  justify-content: center;    /* Center them horizontally inside the container */
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
 }
 
-
-/* Style for all control buttons */
 .audio-controls button {
   font-size: 20px;
   color: #131B23;
@@ -485,7 +436,7 @@ progress::-moz-progress-bar {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  display: inline-flex;       /* Ensures the content is inline & centered */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
@@ -497,7 +448,7 @@ progress::-moz-progress-bar {
 
 .slide-in-left {
   opacity: 0;
-  transform: translateX(-30px); /* Starts from the left */
+  transform: translateX(-30px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
@@ -508,7 +459,7 @@ progress::-moz-progress-bar {
 
 .slide-in-right {
   opacity: 0;
-  transform: translateX(30px); /* Starts from the right */
+  transform: translateX(30px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
@@ -517,7 +468,6 @@ progress::-moz-progress-bar {
   transform: translateX(0);
 }
 
-/* Mobile nav styles */
 .menu-icon {
   display: none;
   font-size: 30px;
@@ -554,7 +504,6 @@ progress::-moz-progress-bar {
     text-overflow: ellipsis;
   }
 
-  /* Make 'selection' column-based on phone */
   .selection {
     display: flex;
     flex-direction: column;
@@ -563,7 +512,7 @@ progress::-moz-progress-bar {
     margin: 20px 0;
   }
 
-    .selection a {
+  .selection a {
     display: block;
     width: 90%;
     text-align: center;
@@ -579,7 +528,6 @@ progress::-moz-progress-bar {
     font-size: 20px;
   }
 
-  /* Make info-container vertical */
   .info-container {
     flex-direction: column;
     width: 100%;
@@ -595,8 +543,7 @@ progress::-moz-progress-bar {
   .hero-image {
     width: 90%;
   }
-
-  
+}
 
 @media (max-width: 768px) {
   .roster {
@@ -611,16 +558,15 @@ progress::-moz-progress-bar {
     font-size: 36px;
   }
 }
-}
 
 @media (max-width: 600px) {
   .card-folder {
-    grid-template-columns: 1fr; /* 1 column only */
-    gap: 30px 0; /* adjust gaps if you want */
+    grid-template-columns: 1fr;
+    gap: 30px 0;
   }
 
   .item {
-    width: 100%; /* make cards take full width of container */
-    max-width: 320px; /* optional max width */
+    width: 100%;
+    max-width: 320px;
   }
 }
