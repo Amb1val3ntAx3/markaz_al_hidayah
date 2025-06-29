@@ -325,29 +325,44 @@ a.active, a:hover {
 }
 
 .item {
-  margin-top: 36px;
-  background-color: #66B6E1;
+  width: 220px; /* fix width same as image or a bit bigger */
+  height: 250px; /* set a fixed height to keep them uniform */
+  background: white;
   border-radius: 12px;
-  padding: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden; /* prevent content spilling */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
   position: relative;
-  width: 260px;
-  box-shadow: #66B6E1 0px 0px 5px;
-  gap: 10px;
+  text-align: center;
 }
 
-.card-image {
-  width: 220px;
-  max-height: 200px; /* limit the height */
-  border-radius: 12px;
-  margin-bottom: 8px;
-  position: absolute;
-  bottom: 150px;
-  box-shadow: black 0px 10px 10px;
-  transition: all 0.3s ease-out;
-  object-fit: cover; /* make sure image fills the box nicely */
+.card-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item h1 {
+  white-space: normal; /* allow wrapping */
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+#cardFolder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
 }
 
 
