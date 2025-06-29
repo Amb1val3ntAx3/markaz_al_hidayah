@@ -342,6 +342,7 @@ a.active, a:hover {
   width: 220px;
   border-radius: 12px;
   margin-bottom: 8px;
+  margin-top: 6px;
   position: absolute;
   bottom: 150px;
   box-shadow: black 0px 10px 10px;
