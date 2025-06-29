@@ -344,13 +344,26 @@ a.active, a:hover {
 }
 
 .card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 220px;
+  height: 150px; /* or auto if preferred */
   border-radius: 12px;
+  background-color: white;
+  box-shadow: black 0px 10px 10px;
   margin-bottom: 8px;
   position: absolute;
-  bottom: 150px;
-  box-shadow: black 0px 10px 10px;
-  transition: all 0.3s ease-out;
+  top: -60px;
+  overflow: hidden;
+  text-align: center;
+  padding: 10px;
+}
+.card-image img, .card-image span {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .card-image:hover {
