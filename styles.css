@@ -340,13 +340,16 @@ a.active, a:hover {
 
 .card-image {
   width: 220px;
+  max-height: 200px; /* limit the height */
   border-radius: 12px;
   margin-bottom: 8px;
   position: absolute;
   bottom: 150px;
   box-shadow: black 0px 10px 10px;
   transition: all 0.3s ease-out;
+  object-fit: cover; /* make sure image fills the box nicely */
 }
+
 
 .card-image:hover {
   bottom: 160px;
