@@ -344,7 +344,7 @@ a.active, a:hover {
   margin-bottom: 8px;
   margin-top: 6px;
   position: absolute;
-  bottom: 150px;
+  bottom: 140px;
   box-shadow: black 0px 10px 10px;
   transition: all 0.3s ease-out;
 }
