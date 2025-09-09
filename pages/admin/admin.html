@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Markaz Al Hidayah</title>
+  <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'David Libre', serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    h2 {
+      color: #1C274C;
+      margin-bottom: 1rem;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin: 0.75rem 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #4a90e2;
+    }
+
+    button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #357ABD;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Optional fade-in for admin form */
+    .admin-form {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .admin-form.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Password Screen -->
+  <div class="container" id="passwordScreen">
+    <h2>—Enter Password—</h2>
+    <input type="password" id="adminPassword" placeholder="Enter Password">
+    <button id="submitPassword">Submit</button>
+  </div>
+
+  <!-- Admin Form -->
+  <div class="container hidden admin-form" id="adminForm">
+    <h2>Add New Audio</h2>
+    <select id="contentType">
+      <option value="naxwe">Naxwah</option>
+      <option value="tafsir">Tafseer</option>
+      <option value="hadith">Hadith</option>
+      <option value="fiqh">Fiqh</option>
+    </select>
+    <input type="text" id="shaykhName" placeholder="Shaykh Name">
+    <input type="text" id="audioName" placeholder="Audio Name">
+    <input type="text" id="audioUrl" placeholder="Audio URL">
+    <button id="submitForm">Submit</button>
+  </div>
+
+<script>
+  // Password check
+  document.getElementById('submitPassword').addEventListener('click', () => {
+    const password = document.getElementById('adminPassword').value;
+
+    if(password === "123") {
+      // Hide password screen
+      const pwScreen = document.getElementById('passwordScreen');
+      pwScreen.style.opacity = '0';
+      setTimeout(() => {
+        pwScreen.style.display = 'none';
+      }, 300);
+
+      // Show admin form
+      const adminForm = document.getElementById('adminForm');
+      adminForm.classList.remove('hidden');
+      adminForm.classList.add('active');
+    } else {
+      alert('Incorrect password. Try again.');
+    }
+  });
+
+  // Form submission
+  // in submitForm listener
+document.getElementById('submitForm').addEventListener('click', async () => {
+  const type = document.getElementById('contentType').value;
+  const name = document.getElementById('shaykhName').value.trim();
+  const audioName = document.getElementById('audioName').value.trim();
+  const audioUrl = document.getElementById('audioUrl').value.trim();
+  const password = "123";  // <-- force match for testing
+
+  if(!type || !name || !audioName || !audioUrl) {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  try {
+    const response = await fetch('/update-json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        type, 
+        name: name + ' - ' + audioName, 
+        audio: audioUrl, 
+        image: '', 
+        password 
+      })
+    });
+    const result = await response.json();
+    if(result.success) {
+      alert('Content added successfully!');
+      document.getElementById('shaykhName').value = '';
+      document.getElementById('audioName').value = '';
+      document.getElementById('audioUrl').value = '';
+    } else {
+      alert('Failed: ' + (result.message || 'Unknown error'));
+    }
+  } catch(err) {
+    console.error(err);
+    alert('Failed to connect to server.');
+  }
+});
+
+</script>
+
+</body>
+</html>

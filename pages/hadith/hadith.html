@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markaz Al Hidayah</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Scheherazade&display=swap" rel="stylesheet">
+
+</head>
+<body id="hadith-page">
+
+    <nav>
+      <div class="nav-left"></div>
+      <label class="logo"><a href="/">Markaz Al Hidayah</a></label>
+      <div class="nav-right">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/tafseer">Tafsiir</a></li>
+          <li><a href="/fiqh">Fiqh</a></li>
+          <li><a href="/hadith">Axaadiista</a></li>
+          <li><a href="/naxwah">Naxwaha</a></li>
+          <li><a class="join" href="#end">Join Us</a></li>
+        </ul>
+        <div class="menu-icon" aria-label="Toggle menu" role="button" tabindex="0">☰</div>
+      </div>
+    </nav>
+    
+    <div class="title">—Arbaceen Imam Nawawi—</div>
+
+<div class="search-bar">
+  <input type="text" placeholder="Search Surah..." />
+  <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" viewBox="0 0 24 24" fill="none">
+    <path opacity="0.1" d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" fill="#323232"/>
+    <path d="M15 15L21 21" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#323232" stroke-width="2"/>
+  </svg>
+</div>
+
+    <div class="surah_container">
+
+
+      </div>
+    </div>
+
+
+
+</body>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".surah_container");
+  let currentAudio = null; // track the currently playing audio
+
+  // Fetch JSON and build surah cards
+  fetch("../storage/hadith.json")
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(item => {
+        const surahDiv = document.createElement("div");
+        surahDiv.classList.add("surah");
+
+        surahDiv.innerHTML = `
+          <h1 class="surah_name">${item.Name}</h1>
+          <h2 class="shaykh_name">${item.Shaykh}</h2>
+
+          <audio src="${item.Audio}"></audio>
+
+          <div class="audio-controls">
+            <!-- Download -->
+            <a href="${item.Audio}" download class="download-button" title="Download"<button class="download-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M3 14.25C3.41421 14.25 3.75 14.5858 3.75 15C3.75 16.4354 3.75159 17.4365 3.85315 18.1919C3.9518 18.9257 4.13225 19.3142 4.40901 19.591C4.68577 19.8678 5.07435 20.0482 5.80812 20.1469C6.56347 20.2484 7.56459 20.25 9 20.25H15C16.4354 20.25 17.4365 20.2484 18.1919 20.1469C18.9257 20.0482 19.3142 19.8678 19.591 19.591C19.8678 19.3142 20.0482 18.9257 20.1469 18.1919C20.2484 17.4365 20.25 16.4354 20.25 15C20.25 14.5858 20.5858 14.25 21 14.25C21.4142 14.25 21.75 14.5858 21.75 15V15.0549C21.75 16.4225 21.75 17.5248 21.6335 18.3918C21.5125 19.2919 21.2536 20.0497 20.6517 20.6516C20.0497 21.2536 19.2919 21.5125 18.3918 21.6335C17.5248 21.75 16.4225 21.75 15.0549 21.75H8.94513C7.57754 21.75 6.47522 21.75 5.60825 21.6335C4.70814 21.5125 3.95027 21.2536 3.34835 20.6517C2.74643 20.0497 2.48754 19.2919 2.36652 18.3918C2.24996 17.5248 2.24998 16.4225 2.25 15.0549C2.25 15.0366 2.25 15.0183 2.25 15C2.25 14.5858 2.58579 14.25 3 14.25Z" fill="#1C274C"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.75C12.2106 16.75 12.4114 16.6615 12.5535 16.5061L16.5535 12.1311C16.833 11.8254 16.8118 11.351 16.5061 11.0715C16.2004 10.792 15.726 10.8132 15.4465 11.1189L12.75 14.0682V3C12.75 2.58579 12.4142 2.25 12 2.25C11.5858 2.25 11.25 2.58579 11.25 3V14.0682L8.55353 11.1189C8.27403 10.8132 7.79963 10.792 7.49393 11.0715C7.18823 11.351 7.16698 11.8254 7.44648 12.1311L11.4465 16.5061C11.5886 16.6615 11.7894 16.75 12 16.75Z" fill="#1C274C"/>
+  </svg>
+</a>
+
+            <!-- Play Button -->
+            <button class="play-button" title="Play/Pause">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"/>
+              </svg>
+            </button>
+
+            <!-- Progress bar -->
+            <input type="range" class="progress" value="0" min="0" max="100" step="0.1">
+
+            <!-- Speed -->
+            <button class="speed-button" title="Speed">1×</button>
+          </div>
+        `;
+
+        container.appendChild(surahDiv);
+
+        // --- Controls ---
+        const audio = surahDiv.querySelector("audio");
+        const playBtn = surahDiv.querySelector(".play-button");
+        const progress = surahDiv.querySelector(".progress");
+        const speedBtn = surahDiv.querySelector(".speed-button");
+
+        // Toggle play/pause
+        playBtn.addEventListener("click", () => {
+          // Stop any currently playing audio
+          if (currentAudio && currentAudio !== audio) {
+            currentAudio.pause();
+            const otherBtn = currentAudio.closest(".surah").querySelector(".play-button");
+            otherBtn.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"/>
+              </svg>`;
+          }
+
+          if (audio.paused) {
+            audio.play();
+            currentAudio = audio;
+            playBtn.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M2 6C2 4.11438 2 3.17157 2.58579 2.58579C3.17157 2 4.11438 2 6 2C7.88562 2 8.82843 2 9.41421 2.58579C10 3.17157 10 4.11438 10 6V18C10 19.8856 10 20.8284 9.41421 21.4142C8.82843 22 7.88562 22 6 22C4.11438 22 3.17157 22 2.58579 21.4142C2 20.8284 2 19.8856 2 18V6Z" fill="#1C274C"/>
+                <path d="M14 6C14 4.11438 14 3.17157 14.5858 2.58579C15.1716 2 16.1144 2 18 2C19.8856 2 20.8284 2 21.4142 2.58579C22 3.17157 22 4.11438 22 6V18C22 19.8856 22 20.8284 21.4142 21.4142C20.8284 22 19.8856 22 18 22C16.1144 22 15.1716 22 14.5858 21.4142C14 20.8284 14 19.8856 14 18V6Z" fill="#1C274C"/>
+              </svg>`;
+          } else {
+            audio.pause();
+            playBtn.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"/>
+              </svg>`;
+          }
+        });
+
+        // Update progress bar
+        audio.addEventListener("timeupdate", () => {
+          progress.value = (audio.currentTime / audio.duration) * 100 || 0;
+        });
+
+        // Seek
+        progress.addEventListener("input", e => {
+          audio.currentTime = (progress.value / 100) * audio.duration;
+        });
+
+        // Speed button
+        let speeds = [1, 1.5, 2];
+        let i = 0;
+        speedBtn.addEventListener("click", () => {
+          i = (i + 1) % speeds.length;
+          audio.playbackRate = speeds[i];
+          speedBtn.textContent = speeds[i] + "×";
+        });
+      });
+    });
+});
+// --- SEARCH FUNCTIONALITY ---
+const searchInput = document.querySelector(".search-bar input");
+
+searchInput.addEventListener("input", () => {
+  const filter = searchInput.value.toLowerCase();
+  const surahs = document.querySelectorAll(".surah");
+
+  surahs.forEach(card => {
+    const surahName = card.querySelector(".surah_name").textContent.toLowerCase();
+    if (surahName.includes(filter)) {
+      card.style.display = "block";  // show matching
+    } else {
+      card.style.display = "none";   // hide non-matching
+    }
+  });
+});
+
+</script>
+
+</html>
+
+

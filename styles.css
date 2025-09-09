@@ -1,0 +1,684 @@
+/* Global reset */
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "David Libre", Arial, Helvetica, sans-serif;
+  background-color: #F5F5F5;
+}
+
+nav {
+  background-color: rgba(255, 250, 250, 0.9); 
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+label.logo {
+  color: #66B6E1;
+  font-size: 32px;
+  line-height: 60px;
+  padding: 0 100px;
+  font-weight: bold;
+}
+
+nav ul {
+  float: right;
+  margin-right: 20px;
+}
+
+nav ul li {
+  display: inline-block;
+  line-height: 60px;
+  margin: 0 5px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+nav ul li a {
+  color: #66B6E1;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+a.active, a:hover {
+  color: #2589BD;
+  transition: .25s;
+}
+
+/* Footer Section Styling */
+.end {
+  background-color: #2C3E50;
+  color: white;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 60px;
+}
+
+.footer-section {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 45%;
+}
+
+.footer-section .title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  color: white;
+  text-align: left;
+}
+
+.footer-section .description {
+  color: #BDC3C7;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.footer-section .contact {
+  text-align: left;
+}
+
+.footer-section li {
+  margin-bottom: 12px;
+}
+
+.footer-section li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.footer-section li a:hover {
+  opacity: 0.8;
+}
+
+#special {
+  text-align: center;
+}
+
+/* WhatsApp and Telegram Specific Styles */
+.footer-section li a.whatsapp {
+  background-color: #25D366;
+  border: 2px solid #128C7E;
+}
+
+.footer-section li a.telegram {
+  background-color: #0088CC;
+  border: 2px solid #0077B5;
+}
+
+.footer-section li a.whatsapp:hover {
+  background-color: #128C7E;
+  border: 2px solid #25D366;
+}
+
+.footer-section li a.telegram:hover {
+  background-color: #0077B5;
+  border: 2px solid #0088CC;
+}
+
+/* For smaller screens (Mobile Responsive) */
+@media (max-width: 768px) {
+  .end {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Other Sections (Retaining Existing Styles) */
+.roster {
+  position: relative;
+  width: 100%;
+  height: 72vh;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.roster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.roster-text {
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 96px;
+  font-weight: bold;
+  z-index: 2;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  letter-spacing: 5px;
+  white-space: nowrap;
+}
+
+/* Title Styling */
+.title {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.join {
+  background-color: #66B6E1;
+  color: white;
+  padding: 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: black 0px 0px 5px;
+}
+
+.join:hover {
+  color: black;
+  background-color: #2589BD;
+  box-shadow: white 0px 0px 5px;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 1200px;
+  margin: 40px auto;
+  gap: 150px;
+  padding: 20px;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.description {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.hero-image {
+  width: 300px;
+  border-radius: 5px;
+  outline: 4px solid #66B6E1;
+  box-shadow: black 10px 10px 10px;
+}
+
+.selection {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.selection a {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-image: url('images/basic.jpeg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.selection a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.selection .text {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 1;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.selection a:hover {
+  transform: scale(1.05);
+}
+
+.selection a:active {
+  transform: scale(0.95);
+}
+
+.everything {
+  height: 65vh;
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+  position: relative;
+}
+
+.card-folder {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px 40px;
+  padding: 35px 0;
+  justify-items: center;
+}
+
+.card-container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 20px;
+  overflow-x: hidden;
+}
+
+.item {
+  margin-top: 36px;
+  background-color: #66B6E1;
+  border-radius: 12px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 260px;
+  box-shadow: #66B6E1 0px 0px 5px;
+  gap: 10px;
+}
+
+.card-image {
+  width: 220px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  margin-top: 6px;
+  position: absolute;
+  bottom: 140px;
+  box-shadow: black 0px 10px 10px;
+  transition: all 0.3s ease-out;
+}
+
+.card-image:hover {
+  bottom: 160px;
+}
+
+.progress-bar {
+  width: 80%;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+progress {
+  width: 100%;
+  height: 12px;
+  border-radius: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #d3eaf2;
+  overflow: hidden;
+  border: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #d3eaf2;
+  border-radius: 20px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #ffffff;
+  border-radius: 20px;
+  transition: width 0.3s ease-in-out;
+}
+
+progress::-moz-progress-bar {
+  background-color: #ffffff;
+  border-radius: 20px;
+  transition: width 0.3s ease-in-out;
+}
+
+.card-name {
+  margin-top: 120px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: snow;
+  padding-bottom: 5px;
+  transition: all 0.3s ease-out;
+}
+
+.card-name:hover {
+  text-shadow: white 0px 0px 5px;
+}
+
+.play-button {
+  font-size: 38px;
+  color: #131B23;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.play-button:hover {
+  background-color: rgba(255, 250, 250, 0.441);
+}
+
+.audio-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-controls button {
+  font-size: 20px;
+  color: #131B23;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.audio-controls button:hover {
+  background-color: rgba(255, 250, 250, 0.441);
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  line-height: 60px;
+  padding-right: 30px;
+  color: #66B6E1;
+}
+
+@media (max-width: 1103px) {
+    nav ul {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background-color: rgba(255, 250, 250, 0.9);
+      position: absolute;
+      top: 60px;
+      left: 0;
+    }
+
+    nav ul.show {
+      display: flex;
+    }
+
+    .menu-icon {
+      display: block;
+    }
+
+    label.logo {
+      font-size: 24px;
+      padding: 0 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+  }
+
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(255, 250, 250, 0.9);
+    position: absolute;
+    top: 60px;
+    left: 0;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  label.logo {
+    font-size: 24px;
+    padding: 0 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  .selection a {
+    display: block;
+    width: 90%;
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .selection .text {
+    font-size: 20px;
+  }
+
+  .info-container {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 20px;
+    padding: 0 10px;
+  }
+
+  .hero-image {
+    width: 90%;
+  }
+
+  /* roster */
+  .roster {
+    max-height: 300px;
+  }
+
+  .roster img {
+    max-height: 300px;
+  }
+
+  .roster-text {
+    font-size: 36px;
+  }
+
+  /* surah container fix */
+  .surah_container {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .card-folder {
+    grid-template-columns: 1fr;
+    gap: 30px 0;
+  }
+
+  .item {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+
+.surah_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: 1.5rem; /* space between cards */
+  justify-items: center; /* center each card inside its grid cell */
+  padding: 1rem;
+  max-width: 1200px; /* golden zone */
+  margin: 0 auto;    /* center horizontally */
+}
+
+.surah {
+padding-left: 2.4rem;
+padding-right: 2.4rem;
+padding-top: 0.5rem;
+padding-bottom: 0.5rem;
+background-color: #E8E8E8;
+margin-bottom: 1rem;
+background-color: F;
+border-radius: 1.4rem;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+outline: #0088CC solid 4px ;
+transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+text-align: center;
+}
+
+.surah:hover {
+  box-shadow: #66B6E1 0px 10px 10px;
+  transform: translateY(-3px); /* optional: slight lift effect */
+  background-color: #F5F5F5; /* lighter on hover */
+
+}
+.shaykh_name {
+  font-size: 16px;
+  color: #333333bc;
+
+}
+.surah_name {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.search-bar {
+  position: relative;
+  width: 71%; /* width of input */
+  display: flex;
+  background-color: white;
+  border-radius: 0.8rem 0.8rem 0.8rem 0.8rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  margin: 2.5rem ;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* golden zone */
+  margin: 0 auto;    /* center horizontally */
+  margin-bottom: 75px;
+}
+
+.search-bar input {
+  width: 75%;
+  border-radius: 0.8rem 0rem 0px 0.8rem;
+  font-size: 1rem;
+  outline: none;
+  margin-left: 10px;
+  border: none;
+  padding-left: 10px;
+}
+
+.search-bar .search-icon {
+  height: 24px;
+  pointer-events: none; /* lets you click input through icon */
+  margin: 10px;
+}
