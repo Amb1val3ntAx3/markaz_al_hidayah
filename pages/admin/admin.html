@@ -99,71 +99,82 @@
     <input type="text" id="audioUrl" placeholder="Audio URL">
     <button id="submitForm">Submit</button>
   </div>
-
 <script>
-  // Password check
-  document.getElementById('submitPassword').addEventListener('click', () => {
-    const password = document.getElementById('adminPassword').value;
+  let adminPassword = null; // will be set after verification
 
-    if(password === "123") {
-      // Hide password screen
-      const pwScreen = document.getElementById('passwordScreen');
-      pwScreen.style.opacity = '0';
-      setTimeout(() => {
-        pwScreen.style.display = 'none';
-      }, 300);
+  // Step 1: Verify password with backend
+  document.getElementById('submitPassword').addEventListener('click', async () => {
+    const password = document.getElementById('adminPassword').value.trim();
 
-      // Show admin form
-      const adminForm = document.getElementById('adminForm');
-      adminForm.classList.remove('hidden');
-      adminForm.classList.add('active');
-    } else {
-      alert('Incorrect password. Try again.');
+    try {
+      const response = await fetch('/verify-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        adminPassword = password; // store securely in memory
+        // Hide password screen
+        const pwScreen = document.getElementById('passwordScreen');
+        pwScreen.style.opacity = '0';
+        setTimeout(() => pwScreen.style.display = 'none', 300);
+
+        // Show admin form
+        const adminForm = document.getElementById('adminForm');
+        adminForm.classList.remove('hidden');
+        adminForm.classList.add('active');
+      } else {
+        alert('Incorrect password. Try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Failed to connect to server.');
     }
   });
 
-  // Form submission
-  // in submitForm listener
-document.getElementById('submitForm').addEventListener('click', async () => {
-  const type = document.getElementById('contentType').value;
-  const name = document.getElementById('shaykhName').value.trim();
-  const audioName = document.getElementById('audioName').value.trim();
-  const audioUrl = document.getElementById('audioUrl').value.trim();
-  const password = "123";  // <-- force match for testing
+  // Step 2: Form submission
+  document.getElementById('submitForm').addEventListener('click', async () => {
+    const type = document.getElementById('contentType').value;
+    const name = document.getElementById('shaykhName').value.trim();
+    const audioName = document.getElementById('audioName').value.trim();
+    const audioUrl = document.getElementById('audioUrl').value.trim();
 
-  if(!type || !name || !audioName || !audioUrl) {
-    alert('Please fill in all fields.');
-    return;
-  }
-
-  try {
-    const response = await fetch('/update-json', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        type, 
-        name: name + ' - ' + audioName, 
-        audio: audioUrl, 
-        image: '', 
-        password 
-      })
-    });
-    const result = await response.json();
-    if(result.success) {
-      alert('Content added successfully!');
-      document.getElementById('shaykhName').value = '';
-      document.getElementById('audioName').value = '';
-      document.getElementById('audioUrl').value = '';
-    } else {
-      alert('Failed: ' + (result.message || 'Unknown error'));
+    if (!type || !name || !audioName || !audioUrl) {
+      alert('Please fill in all fields.');
+      return;
     }
-  } catch(err) {
-    console.error(err);
-    alert('Failed to connect to server.');
-  }
-});
 
+    try {
+      const response = await fetch('/update-json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type,
+          name: name + ' - ' + audioName,
+          audio: audioUrl,
+          image: '',
+          password: adminPassword // send verified password
+        })
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Content added successfully!');
+        document.getElementById('shaykhName').value = '';
+        document.getElementById('audioName').value = '';
+        document.getElementById('audioUrl').value = '';
+      } else {
+        alert('Failed: ' + (result.message || 'Unknown error'));
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Failed to connect to server.');
+    }
+  });
 </script>
+
 
 </body>
 </html>
