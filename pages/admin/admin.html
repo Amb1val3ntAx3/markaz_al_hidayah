@@ -152,9 +152,9 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           type,
-          name: name + ' - ' + audioName,
-          audio: audioUrl,
-          image: '',
+          Name: audioName,
+          Shaykh: name,
+          Audio: audioUrl,
           password: adminPassword // send verified password
         })
       });
