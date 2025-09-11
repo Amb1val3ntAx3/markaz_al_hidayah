@@ -53,7 +53,7 @@ function autoCommitToGitHub(commitMessage = 'Auto update') {
 app.get('/index.html', (req, res) => res.redirect('/'));
 
 // Serve pages
-['naxwah', 'tafseer', 'admin','fiqh', 'hadith'].forEach((page) => {
+['naxwah', 'tafseer', 'admin','fiqh', 'hadith','muxadaro'].forEach((page) => {
   app.get(`/${page}`, (req, res) => {
     res.sendFile(path.join(__dirname, 'pages', page, `${page}.html`));
   });
